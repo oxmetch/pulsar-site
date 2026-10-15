@@ -375,6 +375,12 @@ body.menu-open { overflow: hidden; }
     column-gap: calc((100% - var(--gutter) * 11) / 12 + var(--gutter) * 2);
     justify-content: center;
   }
+  /* history: text + timeline card as one centred group, card sized to its content */
+  .history .split.split--top {
+    grid-template-columns: min(var(--grid-5), 520px) auto;
+    column-gap: calc((100% - var(--gutter) * 11) / 12 + var(--gutter) * 2);
+    justify-content: center;
+  }
   html[lang="en"] .step:last-child .step__body .h3 { white-space: nowrap; } /* last column: may run into the margin */
   .hero__copy { max-width: none; }
   .hero__copy > :not(.h1) { max-width: var(--span-5); }
@@ -498,6 +504,10 @@ body.menu-open { overflow: hidden; }
    ========================================================================== */
 .history { padding-block: 128px; }
 .history .split { grid-template-columns: var(--grid-5) var(--grid-6); justify-content: space-between; }
+/* two columns: the intro stays in view while the timeline scrolls past */
+@media (min-width: 992px) {
+  .history .split > :first-child { position: sticky; top: calc(var(--header-h) + 40px); }
+}
 .timeline { padding: 8px 32px; border-radius: 16px; background: var(--gray-50); }
 .timeline__item { display: flex; gap: 24px; padding-block: 24px; }
 .timeline__item + .timeline__item { box-shadow: inset 0 1px 0 var(--gray-200); }
