@@ -1,0 +1,4 @@
+dist/
+docs/
+.DS_Store
+.claude/

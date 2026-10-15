@@ -1,0 +1,17 @@
+[build]
+  publish = "."
+
+[[redirects]]
+  from = "/favicon.ico"
+  to = "/assets/img/favicon-48.png"
+  status = 200
+
+[[redirects]]
+  from = "/privacy.html"
+  to = "/privacy/"
+  status = 301
+
+[[redirects]]
+  from = "/kk/*"
+  to = "/kz/:splat"
+  status = 301

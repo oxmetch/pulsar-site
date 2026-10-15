@@ -1,0 +1,180 @@
+(() => {
+  'use strict';
+
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* Mobile menu --------------------------------------------------------- */
+  const menu = document.getElementById('menu');
+  const openBtn = document.querySelector('[data-menu-open]');
+
+  const setMenu = (open) => {
+    if (!menu || !openBtn) return;
+    if (open) {
+      menu.hidden = false;
+      requestAnimationFrame(() => menu.classList.add('is-open'));
+      menu.querySelector('.menu__close')?.focus();
+    } else {
+      menu.classList.remove('is-open');
+      setTimeout(() => { if (!menu.classList.contains('is-open')) menu.hidden = true; }, 200);
+      openBtn.focus({ preventScroll: true });
+    }
+    openBtn.setAttribute('aria-expanded', String(open));
+    document.body.classList.toggle('menu-open', open);
+  };
+
+  openBtn?.addEventListener('click', () => setMenu(true));
+  menu?.querySelectorAll('[data-menu-close]').forEach((el) =>
+    el.addEventListener('click', () => setMenu(false))
+  );
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && menu?.classList.contains('is-open')) setMenu(false);
+  });
+  window.matchMedia('(min-width: 992px)').addEventListener('change', (e) => {
+    if (e.matches && menu?.classList.contains('is-open')) setMenu(false);
+  });
+
+  /* Language switcher: keep the current section when switching ---------- */
+  document.querySelectorAll('.lang a').forEach((a) => {
+    a.addEventListener('click', () => {
+      if (location.hash) a.href = a.getAttribute('href').split('#')[0] + location.hash;
+    });
+  });
+
+  /* SmartRail video: load and play only while visible -------------------- */
+  document.querySelectorAll('video[data-autoplay]').forEach((video) => {
+    const load = () => {
+      const source = video.querySelector('source[data-src]');
+      if (source) {
+        source.src = source.dataset.src;
+        source.removeAttribute('data-src');
+        video.load();
+      }
+    };
+    if (reduceMotion || !('IntersectionObserver' in window)) {
+      video.controls = true;
+      video.preload = 'metadata';
+      load();
+      return;
+    }
+    new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          load();
+          video.play().catch(() => { video.controls = true; });
+        } else {
+          video.pause();
+        }
+      });
+    }, { threshold: 0.25 }).observe(video);
+  });
+
+  /* Contact form -------------------------------------------------------- */
+  const card = document.querySelector('[data-form-card]');
+  const form = card?.querySelector('form');
+
+  const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+  const PHONE = /^\+?[\d\s()-]{7,}$/;
+  const validators = {
+    name: (v) => v.trim().length > 1,
+    contact: (v) => EMAIL.test(v.trim()) || PHONE.test(v.trim()),
+  };
+
+  const validateField = (input) => {
+    const check = validators[input.name];
+    if (!check) return true;
+    const ok = check(input.value);
+    input.closest('.field')?.classList.toggle('is-invalid', !ok);
+    input.setAttribute('aria-invalid', String(!ok));
+    return ok;
+  };
+
+  if (form) {
+    const fields = [...form.querySelectorAll('input[name="name"], input[name="contact"]')];
+    fields.forEach((input) => {
+      input.addEventListener('blur', () => { if (input.value) validateField(input); });
+      input.addEventListener('input', () => {
+        if (input.closest('.field')?.classList.contains('is-invalid')) validateField(input);
+      });
+    });
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (!fields.map(validateField).every(Boolean)) {
+        form.querySelector('.is-invalid input')?.focus();
+        return;
+      }
+      if (form.elements._gotcha?.value) return; // bot
+
+      const formData = new FormData(form);
+      formData.delete('_gotcha');
+      const data = Object.fromEntries(formData);
+      const button = form.querySelector('[type="submit"]');
+      const { accessKey, fallbackEmail, msgSending, msgError, mailSubject } = form.dataset;
+
+      if (!accessKey) {
+        // No Web3Forms key configured — open an email draft instead.
+        const body = `Name: ${data.name}\nCompany: ${data.company || '—'}\nContact: ${data.contact}\nLanguage: ${data.language}\n\n${data.message || ''}`;
+        window.location.href = `mailto:${fallbackEmail}?subject=${encodeURIComponent(mailSubject)}&body=${encodeURIComponent(body)}`;
+        return;
+      }
+
+      button.disabled = true;
+      const label = button.textContent;
+      button.textContent = msgSending;
+      try {
+        // Web3Forms: emails the submission to the address the access key was created for
+        const isEmail = /\S+@\S+\.\S+/.test(data.contact);
+        const res = await fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify({
+            access_key: accessKey,
+            subject: `${mailSubject} · ${data.language}`,
+            from_name: 'Pulsar.ai website',
+            ...(isEmail && { replyto: data.contact }),
+            name: data.name,
+            company: data.company || '—',
+            contact: data.contact,
+            language: data.language,
+            message: data.message || '—',
+            botcheck: false,
+          }),
+        });
+        const json = await res.json().catch(() => ({}));
+        if (!res.ok || !json.success) throw new Error(json.message || res.statusText);
+        form.reset();
+        card.classList.add('is-sent');
+        card.querySelector('.form-success button')?.focus();
+      } catch {
+        alert(`${msgError} ${fallbackEmail}`);
+      } finally {
+        button.disabled = false;
+        button.textContent = label;
+      }
+    });
+
+    card.querySelector('[data-form-reset]')?.addEventListener('click', () => {
+      card.classList.remove('is-sent');
+      form.querySelector('input:not([type="hidden"])')?.focus();
+    });
+  }
+
+  /* Reveal on scroll ---------------------------------------------------- */
+  const reveals = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window && !reduceMotion) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+    reveals.forEach((el) => io.observe(el));
+  } else {
+    reveals.forEach((el) => el.classList.add('is-visible'));
+  }
+
+  /* Year ---------------------------------------------------------------- */
+  document.querySelectorAll('[data-year]').forEach((el) => { el.textContent = new Date().getFullYear(); });
+})();

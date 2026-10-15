@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="{{@lang}}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{privacy.title}} — Pulsar.ai</title>
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="/assets/img/favicon-32.png?v={{@version}}" sizes="32x32" type="image/png">
+  <link rel="icon" href="/assets/img/favicon-48.png?v={{@version}}" sizes="48x48" type="image/png">
+  <link rel="icon" href="/assets/img/icon-192.png?v={{@version}}" sizes="192x192" type="image/png">
+  <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png?v={{@version}}">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400..800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/styles.css?v={{@version}}">
+</head>
+<body>
+  <header class="header">
+    <div class="container header__inner">
+      <a class="logo" href="{{@home}}" aria-label="{{logo.home}}"><img src="/assets/img/logo.svg?v={{@version}}" alt="Pulsar.ai" width="119" height="24"></a>
+      <div class="header__right">
+{{@lang_switch}}
+        <a class="btn btn--primary btn--sm legal__back" href="{{@home}}">{{privacy.back}}</a>
+      </div>
+    </div>
+  </header>
+  <main class="container">
+    <!-- DRAFT: to be reviewed and approved by Pulsar.ai -->
+    <article class="legal">
+      <h1 class="h1">{{privacy.title}}</h1>
+      <p>{{privacy.updated}}</p>
+      <h2>{{privacy.h1}}</h2>
+      <p>{{privacy.t1}}</p>
+      <h2>{{privacy.h2}}</h2>
+      <ul>
+        <li>{{privacy.l1}}</li>
+        <li>{{privacy.l2}}</li>
+      </ul>
+      <p>{{privacy.t2}}</p>
+      <h2>{{privacy.h3}}</h2>
+      <p>{{privacy.t3}}</p>
+      <h2>{{privacy.h4}}</h2>
+      <p>{{privacy.t4}} <a href="mailto:zhanara.galym@gmail.com">zhanara.galym@gmail.com</a>.</p>
+    </article>
+  </main>
+</body>
+</html>
