@@ -453,9 +453,11 @@ body.menu-open { overflow: hidden; }
 .step__line {
   flex: 1;
   height: 2px;
-  margin-right: 16px;
+  margin-right: calc(var(--gutter) * -1); /* runs across the gutter up to the next step */
   background: repeating-linear-gradient(90deg, var(--gray-200) 0 12px, transparent 12px 24px);
+  animation: step-flow 1.2s linear infinite;
 }
+@keyframes step-flow { to { background-position-x: 24px; } }
 .step:last-child .step__line { display: none; }
 .step__body { display: flex; flex-direction: column; gap: 8px; }
 .step__body p { color: var(--gray-600); }
@@ -877,6 +879,7 @@ body.menu-open { overflow: hidden; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .reveal { opacity: 1; transform: none; transition: none; }
+  .step__line { animation: none; }
   * { transition-duration: 0s !important; }
 }
 
