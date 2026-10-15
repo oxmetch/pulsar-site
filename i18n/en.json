@@ -82,7 +82,7 @@
   "report.docs_note": "The scope of documented data depends on source availability and connected integrations.",
   "report.scan_title": "Actual condition",
   "report.scan_sub": "What the body and underbody scan shows today: corrosion, leaks, damage, welds and impact marks.",
-  "report.photo_1": "Corrosion and damage",
+  "report.photo_1": "Corrosion",
   "report.photo_2": "Oil leak",
   "report.photo_3": "Corrosion",
 
