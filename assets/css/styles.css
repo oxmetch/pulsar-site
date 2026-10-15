@@ -50,7 +50,7 @@
   --margin: 120px;
   --gutter: 24px;
   --section-y: 128px;
-  --container: 1400px;
+  --container: 1200px; /* = the 1440 layout; wider screens just get wider side margins */
   --header-h: 88px;
 
   /* 12-column grid: width of n columns inside .container (cqw = container content width) */
