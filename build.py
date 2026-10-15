@@ -18,9 +18,9 @@ from pathlib import Path
 ROOT = Path(__file__).parent
 SRC, DIST = ROOT / "src", ROOT / "dist"
 SITE = "https://pulsar-ai.co"
-# Web3Forms access key (public by design: it only lets the form send mail to its owner).
+# URL of the Cloudflare Worker that forwards form submissions to Telegram (tools/telegram-worker.js).
 # Empty = the contact form falls back to opening an email draft.
-WEB3FORMS_KEY = ""
+FORM_ENDPOINT = "https://pulsar-leads.abdinagii03.workers.dev"
 
 LANGS = [
     # code (json + hreflang), html lang, url prefix, switcher label, og locale
@@ -80,7 +80,7 @@ def render(template, lang, page_path, strings, version):
         "lang_switch": lang_switch(page_path, lang, strings),
         "og_locale": lang["og"],
         "version": version,
-        "web3forms_key": WEB3FORMS_KEY,
+        "form_endpoint": FORM_ENDPOINT,
     }
 
     def sub_partial(m):

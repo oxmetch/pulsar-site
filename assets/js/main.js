@@ -109,10 +109,10 @@
       formData.delete('_gotcha');
       const data = Object.fromEntries(formData);
       const button = form.querySelector('[type="submit"]');
-      const { accessKey, fallbackEmail, msgSending, msgError, mailSubject } = form.dataset;
+      const { endpoint, fallbackEmail, msgSending, msgError, mailSubject } = form.dataset;
 
-      if (!accessKey) {
-        // No Web3Forms key configured — open an email draft instead.
+      if (!endpoint) {
+        // No form endpoint configured — open an email draft instead.
         const body = `Name: ${data.name}\nCompany: ${data.company || '—'}\nContact: ${data.contact}\nLanguage: ${data.language}\n\n${data.message || ''}`;
         window.location.href = `mailto:${fallbackEmail}?subject=${encodeURIComponent(mailSubject)}&body=${encodeURIComponent(body)}`;
         return;
@@ -122,23 +122,11 @@
       const label = button.textContent;
       button.textContent = msgSending;
       try {
-        // Web3Forms: emails the submission to the address the access key was created for
-        const isEmail = /\S+@\S+\.\S+/.test(data.contact);
-        const res = await fetch('https://api.web3forms.com/submit', {
+        // Cloudflare Worker (tools/telegram-worker.js) posts the request to the team's Telegram chat
+        const res = await fetch(endpoint, {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-          body: JSON.stringify({
-            access_key: accessKey,
-            subject: `${mailSubject} · ${data.language}`,
-            from_name: 'Pulsar.ai website',
-            ...(isEmail && { replyto: data.contact }),
-            name: data.name,
-            company: data.company || '—',
-            contact: data.contact,
-            language: data.language,
-            message: data.message || '—',
-            botcheck: false,
-          }),
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data),
         });
         const json = await res.json().catch(() => ({}));
         if (!res.ok || !json.success) throw new Error(json.message || res.statusText);

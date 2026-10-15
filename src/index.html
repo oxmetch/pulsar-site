@@ -492,9 +492,9 @@
             <h3 class="form-card__title">{{contact.form_title}}</h3>
             <p class="form-card__sub">{{contact.form_sub}}</p>
           </div>
-          <!-- Web3Forms emails submissions (key in build.py). Without a key the form opens an email draft. -->
-          <form class="form" name="contact" method="POST" action="https://api.web3forms.com/submit" novalidate
-                data-access-key="{{@web3forms_key}}" data-fallback-email="zhanara.galym@gmail.com" data-msg-sending="{{contact.sending}}" data-msg-error="{{contact.error}}" data-mail-subject="{{contact.mail_subject}}">
+          <!-- Submissions go to Telegram via a Cloudflare Worker (FORM_ENDPOINT in build.py). Without it the form opens an email draft. -->
+          <form class="form" name="contact" method="POST" novalidate
+                data-endpoint="{{@form_endpoint}}" data-fallback-email="zhanara.galym@gmail.com" data-msg-sending="{{contact.sending}}" data-msg-error="{{contact.error}}" data-mail-subject="{{contact.mail_subject}}">
             <input type="hidden" name="language" value="{{@lang_label}}">
             <div class="form__row">
               <div class="field">
