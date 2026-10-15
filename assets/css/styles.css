@@ -369,7 +369,12 @@ body.menu-open { overflow: hidden; }
   .br-xl { display: inline; }
   .step__body .h3, #report .section-head__aside { text-wrap: wrap; }
   .vision .vision__grid { align-items: center; } /* text centred against the certificate */
-  .vision__text .lead { text-wrap: wrap; } /* fill the column so the pair sits evenly between the margins */
+  /* certificate and text as one group, centred: 5 cols + (1 col + 2 gutters) + 5 cols */
+  .vision .vision__grid {
+    grid-template-columns: var(--grid-5) min(var(--grid-5), 520px);
+    column-gap: calc((100% - var(--gutter) * 11) / 12 + var(--gutter) * 2);
+    justify-content: center;
+  }
   html[lang="en"] .step:last-child .step__body .h3 { white-space: nowrap; } /* last column: may run into the margin */
   .hero__copy { max-width: none; }
   .hero__copy > :not(.h1) { max-width: var(--span-5); }
