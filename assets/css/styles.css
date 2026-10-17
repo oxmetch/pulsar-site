@@ -372,6 +372,14 @@ body.menu-open { overflow: hidden; }
   .hero__copy { max-width: none; }
   .hero__copy > :not(.h1) { max-width: var(--span-5); }
   .audience .audience__head { max-width: var(--span-6); }
+  /* why: image 5 cols, text 6 cols (long RU/KZ headings fit in 3 lines), tops aligned */
+  section.why .split { grid-template-columns: var(--grid-5) var(--grid-6); justify-content: space-between; align-items: start; }
+  section.why .photo { aspect-ratio: 486 / 336; }
+  section.why .why__text { max-width: none; }
+  section.why .why__text > :not(.h1) { max-width: var(--span-5); }
+  /* smartrail: heading may use the full 6-col column, copy stays at 5 */
+  section.smartrail .smartrail__text { max-width: none; }
+  section.smartrail .smartrail__text > :not(.h1) { max-width: var(--span-5); }
 }
 .hero__media img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 61%; }
 
@@ -389,7 +397,6 @@ body.menu-open { overflow: hidden; }
    ========================================================================== */
 .smartrail { padding-block: 128px; }
 .smartrail__text { max-width: var(--span-5); }
-.smartrail__text .h1 { max-width: 436px; }
 .video {
   position: relative;
   aspect-ratio: 588 / 400;
