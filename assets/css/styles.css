@@ -368,7 +368,6 @@ body.menu-open { overflow: hidden; }
 @media (min-width: 1280px) {
   .br-xl { display: inline; }
   .step__body .h3, #report .section-head__aside { text-wrap: wrap; }
-  .vision .vision__grid { align-items: center; } /* text centred against the certificate */
   html[lang="en"] .step:last-child .step__body .h3 { white-space: nowrap; } /* last column: may run into the margin */
   .hero__copy { max-width: none; }
   .hero__copy > :not(.h1) { max-width: var(--span-5); }
