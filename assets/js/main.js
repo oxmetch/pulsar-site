@@ -3,10 +3,16 @@
 
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  /* Analytics events: pushed to dataLayer, picked up by GTM / GA4 when it is installed */
+  /* Analytics events. The GA4 Google tag (loaded by GTM) reads gtag() commands from dataLayer,
+     so each event goes straight to GA4; the plain { event } push is there for GTM triggers. */
   window.dataLayer = window.dataLayer || [];
+  function gtag() { window.dataLayer.push(arguments); }
   const lang = document.documentElement.lang;
-  const track = (event, params = {}) => window.dataLayer.push({ event, page_language: lang, ...params });
+  const track = (event, params = {}) => {
+    const data = { page_language: lang, ...params };
+    gtag('event', event, data);
+    window.dataLayer.push({ event: `site.${event}`, ...data });
+  };
 
   document.addEventListener('click', (e) => {
     const link = e.target.closest('a');
