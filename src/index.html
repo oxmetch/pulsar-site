@@ -14,13 +14,22 @@
   <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png?v={{@version}}">
   <link rel="manifest" href="/site.webmanifest">
 
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Pulsar.ai">
   <meta property="og:url" content="{{@canonical}}">
   <meta property="og:locale" content="{{@og_locale}}">
   <meta property="og:title" content="{{og.title}}">
   <meta property="og:description" content="{{og.description}}">
-  <meta property="og:image" content="https://pulsar-ai.co/assets/img/hero-car.jpg">
+  <meta property="og:image" content="{{@og_image}}">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="{{og.title}}">
   <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{og.title}}">
+  <meta name="twitter:description" content="{{og.description}}">
+  <meta name="twitter:image" content="{{@og_image}}">
+{{@head_extra}}
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -29,18 +38,11 @@
   <link rel="preload" as="image" href="/assets/img/hero-car.jpg">
 
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "Pulsar.ai",
-    "url": "https://pulsar-ai.co/",
-    "logo": "https://pulsar-ai.co/assets/img/logo.svg",
-    "description": "{{footer.text}}",
-    "email": "zhanara.galym@gmail.com"
-  }
+{{@jsonld}}
   </script>
 </head>
 <body>
+{{@body_extra}}
   <a class="skip-link" href="#main">{{skip}}</a>
 
   <!-- SVG sprite: Lucide icons (24 grid, stroke 2) -->
@@ -128,7 +130,7 @@
           </div>
         </div>
         <div class="hero__media">
-          <img src="/assets/img/hero-car.jpg" alt="{{hero.img_alt}}" width="1600" height="1363" fetchpriority="high">
+          <img src="/assets/img/hero-car.jpg" alt="{{hero.img_alt}}" width="1200" height="1022" fetchpriority="high">
         </div>
       </div>
     </section>
@@ -144,14 +146,14 @@
             <p>{{about.p2}}</p>
           </div>
         </div>
-        <div class="photo reveal"><img src="/assets/img/about.jpg" alt="{{about.img_alt}}" width="1264" height="848" loading="lazy"></div>
+        <div class="photo reveal"><img src="/assets/img/about.jpg" alt="{{about.img_alt}}" width="1264" height="848" loading="lazy" decoding="async"></div>
       </div>
     </section>
 
     <!-- Why ============================================================== -->
     <section class="why" aria-labelledby="why-title">
       <div class="container split">
-        <div class="photo reveal"><img src="/assets/img/why.jpg" alt="{{why.img_alt}}" width="1264" height="848" loading="lazy"></div>
+        <div class="photo reveal"><img src="/assets/img/why.jpg" alt="{{why.img_alt}}" width="1264" height="848" loading="lazy" decoding="async"></div>
         <div class="why__text stack reveal">
           <p class="eyebrow eyebrow--cyan">{{why.eyebrow}}</p>
           <h2 class="h1" id="why-title">{{why.title}}</h2>
@@ -289,15 +291,15 @@
             </div>
             <div class="mosaic">
               <figure class="mosaic__item mosaic__item--wide">
-                <img src="/assets/img/report-1.jpg" alt="" width="900" height="1200" loading="lazy" style="object-position:50% 45%">
+                <img src="/assets/img/report-1.jpg" alt="{{report.photo_1_alt}}" width="900" height="1200" loading="lazy" decoding="async" style="object-position:50% 45%">
                 <figcaption>{{report.photo_1}}</figcaption>
               </figure>
               <figure class="mosaic__item">
-                <img src="/assets/img/report-oil-leak.jpg" alt="" width="720" height="538" loading="lazy">
+                <img src="/assets/img/report-oil-leak.jpg" alt="{{report.photo_2_alt}}" width="720" height="538" loading="lazy" decoding="async">
                 <figcaption>{{report.photo_2}}</figcaption>
               </figure>
               <figure class="mosaic__item">
-                <img src="/assets/img/report-3.jpg" alt="" width="900" height="675" loading="lazy" style="object-position:50% 0%">
+                <img src="/assets/img/report-3.jpg" alt="{{report.photo_3_alt}}" width="900" height="675" loading="lazy" decoding="async" style="object-position:50% 0%">
                 <figcaption>{{report.photo_3}}</figcaption>
               </figure>
             </div>
@@ -321,7 +323,7 @@
             <div class="timeline__body">
               <div><p class="timeline__title">{{history.i1_title}}</p><p class="timeline__desc">{{history.i1_desc}}</p></div>
               <div class="shot">
-                <img src="/assets/img/hist-1.jpg" alt="" width="1264" height="848" loading="lazy">
+                <img src="/assets/img/hist-1.jpg" alt="{{history.i1_title}}: {{history.i1_desc}}" width="840" height="563" loading="lazy" decoding="async">
                 <span class="detect detect--amber" style="left:42.9%;top:38.1%;width:22.4%;height:31%"><span class="detect__tag">{{history.i1_tag}}</span></span>
               </div>
             </div>
@@ -331,7 +333,7 @@
             <div class="timeline__body">
               <div><p class="timeline__title">{{history.i2_title}}</p><p class="timeline__desc">{{history.i2_desc}}</p></div>
               <div class="shot">
-                <img src="/assets/img/hist-2.jpg" alt="" width="1264" height="848" loading="lazy">
+                <img src="/assets/img/hist-2.jpg" alt="{{history.i2_title}}: {{history.i2_desc}}" width="840" height="563" loading="lazy" decoding="async">
                 <span class="detect detect--red" style="left:35.9%;top:35.1%;width:27.1%;height:40.4%"><span class="detect__tag">{{history.i2_tag}}</span></span>
               </div>
             </div>
@@ -341,7 +343,7 @@
             <div class="timeline__body">
               <div><p class="timeline__title">{{history.i3_title}}</p><p class="timeline__desc">{{history.i3_desc}}</p></div>
               <div class="shot">
-                <img src="/assets/img/hist-3.jpg" alt="" width="1264" height="848" loading="lazy">
+                <img src="/assets/img/hist-3.jpg" alt="{{history.i3_title}}: {{history.i3_desc}}" width="840" height="563" loading="lazy" decoding="async">
                 <span class="detect detect--green" style="left:42.9%;top:37.7%;width:22.4%;height:30.7%"><span class="detect__tag">{{history.i3_tag}}</span></span>
               </div>
             </div>

@@ -3,6 +3,27 @@
 
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  /* Analytics events: pushed to dataLayer, picked up by GTM / GA4 when it is installed */
+  window.dataLayer = window.dataLayer || [];
+  const lang = document.documentElement.lang;
+  const track = (event, params = {}) => window.dataLayer.push({ event, page_language: lang, ...params });
+
+  document.addEventListener('click', (e) => {
+    const link = e.target.closest('a');
+    if (!link) return;
+    const href = link.getAttribute('href') || '';
+    if (link.matches('.btn') && href.endsWith('#contact')) {
+      const where = link.closest('header, .menu, .hero') ? link.closest('header, .menu, .hero').className.split(' ')[0] : 'page';
+      track('cta_click', { cta_text: link.textContent.trim(), cta_location: where });
+    } else if (href.startsWith('mailto:')) {
+      track('contact_click', { contact_method: 'email' });
+    } else if (href.startsWith('https://t.me/')) {
+      track('contact_click', { contact_method: 'telegram' });
+    } else if (link.closest('.lang')) {
+      track('language_switch', { to_language: link.getAttribute('hreflang') });
+    }
+  });
+
   /* Mobile menu --------------------------------------------------------- */
   const menu = document.getElementById('menu');
   const openBtn = document.querySelector('[data-menu-open]');
@@ -60,7 +81,9 @@
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           load();
-          video.play().catch(() => { video.controls = true; });
+          video.play().then(() => {
+            if (!video.dataset.tracked) { video.dataset.tracked = '1'; track('video_start', { video_title: 'SmartRail' }); }
+          }).catch(() => { video.controls = true; });
         } else {
           video.pause();
         }
@@ -132,6 +155,7 @@
         if (!res.ok || !json.success) throw new Error(json.message || res.statusText);
         form.reset();
         card.classList.add('is-sent');
+        track('generate_lead', { form_name: 'contact', lead_language: data.language });
         card.querySelector('.form-success button')?.focus();
       } catch {
         alert(`${msgError} ${fallbackEmail}`);

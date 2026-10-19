@@ -85,6 +85,9 @@
   "report.photo_1": "Corrosion",
   "report.photo_2": "Oil leak",
   "report.photo_3": "Corrosion",
+  "report.photo_1_alt": "Underbody scan: corrosion on the front subframe flagged by AI",
+  "report.photo_2_alt": "Underbody scan: oil leak around the gearbox",
+  "report.photo_3_alt": "Underbody scan: surface rust on the tow hook mount",
 
   "history.eyebrow": "Scan history",
   "history.title": "It's not just about spotting a defect, but understanding how it changes",
