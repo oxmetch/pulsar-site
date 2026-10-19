@@ -33,9 +33,10 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400&family=Manrope:wght@400..800&display=swap" rel="stylesheet">
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400&family=Manrope:wght@400..800&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400&family=Manrope:wght@400..800&display=swap"></noscript>
   <link rel="stylesheet" href="/assets/css/styles.css?v={{@version}}">
-  <link rel="preload" as="image" href="/assets/img/hero-car.jpg">
+  <link rel="preload" as="image" href="/assets/img/hero-car.avif" type="image/avif" fetchpriority="high">
 
   <script type="application/ld+json">
 {{@jsonld}}
@@ -130,7 +131,7 @@
           </div>
         </div>
         <div class="hero__media">
-          <img src="/assets/img/hero-car.jpg" alt="{{hero.img_alt}}" width="1200" height="1022" fetchpriority="high">
+          <picture><source srcset="/assets/img/hero-car.avif" type="image/avif"><img src="/assets/img/hero-car.jpg" alt="{{hero.img_alt}}" width="1200" height="1022" fetchpriority="high"></picture>
         </div>
       </div>
     </section>
@@ -146,14 +147,14 @@
             <p>{{about.p2}}</p>
           </div>
         </div>
-        <div class="photo reveal"><img src="/assets/img/about.jpg" alt="{{about.img_alt}}" width="1264" height="848" loading="lazy" decoding="async"></div>
+        <div class="photo reveal"><picture><source srcset="/assets/img/about.avif" type="image/avif"><img src="/assets/img/about.jpg" alt="{{about.img_alt}}" width="1264" height="848" loading="lazy" decoding="async"></picture></div>
       </div>
     </section>
 
     <!-- Why ============================================================== -->
     <section class="why" aria-labelledby="why-title">
       <div class="container split">
-        <div class="photo reveal"><img src="/assets/img/why.jpg" alt="{{why.img_alt}}" width="1264" height="848" loading="lazy" decoding="async"></div>
+        <div class="photo reveal"><picture><source srcset="/assets/img/why.avif" type="image/avif"><img src="/assets/img/why.jpg" alt="{{why.img_alt}}" width="1264" height="848" loading="lazy" decoding="async"></picture></div>
         <div class="why__text stack reveal">
           <p class="eyebrow eyebrow--cyan">{{why.eyebrow}}</p>
           <h2 class="h1" id="why-title">{{why.title}}</h2>
@@ -291,15 +292,15 @@
             </div>
             <div class="mosaic">
               <figure class="mosaic__item mosaic__item--wide">
-                <img src="/assets/img/report-1.jpg" alt="{{report.photo_1_alt}}" width="900" height="1200" loading="lazy" decoding="async" style="object-position:50% 45%">
+                <picture><source srcset="/assets/img/report-1.avif" type="image/avif"><img src="/assets/img/report-1.jpg" alt="{{report.photo_1_alt}}" width="900" height="1200" loading="lazy" decoding="async" style="object-position:50% 45%"></picture>
                 <figcaption>{{report.photo_1}}</figcaption>
               </figure>
               <figure class="mosaic__item">
-                <img src="/assets/img/report-oil-leak.jpg" alt="{{report.photo_2_alt}}" width="720" height="538" loading="lazy" decoding="async">
+                <picture><source srcset="/assets/img/report-oil-leak.avif" type="image/avif"><img src="/assets/img/report-oil-leak.jpg" alt="{{report.photo_2_alt}}" width="720" height="538" loading="lazy" decoding="async"></picture>
                 <figcaption>{{report.photo_2}}</figcaption>
               </figure>
               <figure class="mosaic__item">
-                <img src="/assets/img/report-3.jpg" alt="{{report.photo_3_alt}}" width="900" height="675" loading="lazy" decoding="async" style="object-position:50% 0%">
+                <picture><source srcset="/assets/img/report-3.avif" type="image/avif"><img src="/assets/img/report-3.jpg" alt="{{report.photo_3_alt}}" width="900" height="675" loading="lazy" decoding="async" style="object-position:50% 0%"></picture>
                 <figcaption>{{report.photo_3}}</figcaption>
               </figure>
             </div>
@@ -323,7 +324,7 @@
             <div class="timeline__body">
               <div><p class="timeline__title">{{history.i1_title}}</p><p class="timeline__desc">{{history.i1_desc}}</p></div>
               <div class="shot">
-                <img src="/assets/img/hist-1.jpg" alt="{{history.i1_title}}: {{history.i1_desc}}" width="840" height="563" loading="lazy" decoding="async">
+                <picture><source srcset="/assets/img/hist-1.avif" type="image/avif"><img src="/assets/img/hist-1.jpg" alt="{{history.i1_title}}: {{history.i1_desc}}" width="840" height="563" loading="lazy" decoding="async"></picture>
                 <span class="detect detect--amber" style="left:42.9%;top:38.1%;width:22.4%;height:31%"><span class="detect__tag">{{history.i1_tag}}</span></span>
               </div>
             </div>
@@ -333,7 +334,7 @@
             <div class="timeline__body">
               <div><p class="timeline__title">{{history.i2_title}}</p><p class="timeline__desc">{{history.i2_desc}}</p></div>
               <div class="shot">
-                <img src="/assets/img/hist-2.jpg" alt="{{history.i2_title}}: {{history.i2_desc}}" width="840" height="563" loading="lazy" decoding="async">
+                <picture><source srcset="/assets/img/hist-2.avif" type="image/avif"><img src="/assets/img/hist-2.jpg" alt="{{history.i2_title}}: {{history.i2_desc}}" width="840" height="563" loading="lazy" decoding="async"></picture>
                 <span class="detect detect--red" style="left:35.9%;top:35.1%;width:27.1%;height:40.4%"><span class="detect__tag">{{history.i2_tag}}</span></span>
               </div>
             </div>
@@ -343,7 +344,7 @@
             <div class="timeline__body">
               <div><p class="timeline__title">{{history.i3_title}}</p><p class="timeline__desc">{{history.i3_desc}}</p></div>
               <div class="shot">
-                <img src="/assets/img/hist-3.jpg" alt="{{history.i3_title}}: {{history.i3_desc}}" width="840" height="563" loading="lazy" decoding="async">
+                <picture><source srcset="/assets/img/hist-3.avif" type="image/avif"><img src="/assets/img/hist-3.jpg" alt="{{history.i3_title}}: {{history.i3_desc}}" width="840" height="563" loading="lazy" decoding="async"></picture>
                 <span class="detect detect--green" style="left:42.9%;top:37.7%;width:22.4%;height:30.7%"><span class="detect__tag">{{history.i3_tag}}</span></span>
               </div>
             </div>
@@ -423,7 +424,7 @@
               <div class="cert__section">
                 <p class="cert__label">{{cert.s1}}</p>
                 <div class="cert__vehicle">
-                  <img src="/assets/img/cert-car.jpg" alt="" width="400" height="268" loading="lazy">
+                  <picture><source srcset="/assets/img/cert-car.avif" type="image/avif"><img src="/assets/img/cert-car.jpg" alt="" width="400" height="268" loading="lazy"></picture>
                   <dl class="cert__facts">
                     <div><dt>{{cert.type}}</dt><dd>{{cert.type_val}}</dd></div>
                     <div><dt>{{cert.year}}</dt><dd>2021</dd></div>
