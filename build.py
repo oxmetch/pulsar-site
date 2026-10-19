@@ -171,6 +171,15 @@ def structured_data(lang, page_url, strings):
     return data.replace("</", "<\\/")  # never close the <script> early
 
 
+def inline_css():
+    """styles.css minified for a <style> tag (comments and extra whitespace removed)."""
+    css = (ROOT / "assets/css/styles.css").read_text()
+    css = re.sub(r"/\*.*?\*/", "", css, flags=re.S)
+    css = re.sub(r"\s+", " ", css)
+    css = re.sub(r"\s*([{};,>])\s*", r"\1", css)
+    return css.replace(";}", "}").strip()
+
+
 def render(template, lang, page_path, strings, version):
     values = {
         "lang": lang["html"],
@@ -187,6 +196,7 @@ def render(template, lang, page_path, strings, version):
         "head_extra": head_extra(),
         "body_extra": body_extra(),
         "jsonld": structured_data(lang, f'{SITE}{lang["prefix"]}{page_path}', strings),
+        "css": inline_css(),
     }
 
     def sub_partial(m):

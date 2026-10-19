@@ -35,8 +35,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400&family=Manrope:wght@400..800&display=swap" onload="this.onload=null;this.rel='stylesheet'">
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400&family=Manrope:wght@400..800&display=swap"></noscript>
-  <link rel="stylesheet" href="/assets/css/styles.css?v={{@version}}">
-  <link rel="preload" as="image" href="/assets/img/hero-car.avif" type="image/avif" fetchpriority="high">
+  <style>{{@css}}</style>
+  <link rel="preload" as="image" imagesrcset="/assets/img/hero-car-640.avif 640w, /assets/img/hero-car.avif 1200w" imagesizes="(max-width: 991px) 100vw, 588px" type="image/avif" fetchpriority="high">
 
   <script type="application/ld+json">
 {{@jsonld}}
@@ -131,7 +131,7 @@
           </div>
         </div>
         <div class="hero__media">
-          <picture><source srcset="/assets/img/hero-car.avif" type="image/avif"><img src="/assets/img/hero-car.jpg" alt="{{hero.img_alt}}" width="1200" height="1022" fetchpriority="high"></picture>
+          <picture><source srcset="/assets/img/hero-car-640.avif 640w, /assets/img/hero-car.avif 1200w" sizes="(max-width: 991px) 100vw, 588px" type="image/avif"><img src="/assets/img/hero-car.jpg" alt="{{hero.img_alt}}" width="1200" height="1022" fetchpriority="high"></picture>
         </div>
       </div>
     </section>
@@ -147,14 +147,14 @@
             <p>{{about.p2}}</p>
           </div>
         </div>
-        <div class="photo reveal"><picture><source srcset="/assets/img/about.avif" type="image/avif"><img src="/assets/img/about.jpg" alt="{{about.img_alt}}" width="1264" height="848" loading="lazy" decoding="async"></picture></div>
+        <div class="photo reveal"><picture><source srcset="/assets/img/about-640.avif 640w, /assets/img/about.avif 1264w" sizes="(max-width: 991px) 100vw, 588px" type="image/avif"><img src="/assets/img/about.jpg" alt="{{about.img_alt}}" width="1264" height="848" loading="lazy" decoding="async"></picture></div>
       </div>
     </section>
 
     <!-- Why ============================================================== -->
     <section class="why" aria-labelledby="why-title">
       <div class="container split">
-        <div class="photo reveal"><picture><source srcset="/assets/img/why.avif" type="image/avif"><img src="/assets/img/why.jpg" alt="{{why.img_alt}}" width="1264" height="848" loading="lazy" decoding="async"></picture></div>
+        <div class="photo reveal"><picture><source srcset="/assets/img/why-640.avif 640w, /assets/img/why.avif 1264w" sizes="(max-width: 991px) 100vw, 588px" type="image/avif"><img src="/assets/img/why.jpg" alt="{{why.img_alt}}" width="1264" height="848" loading="lazy" decoding="async"></picture></div>
         <div class="why__text stack reveal">
           <p class="eyebrow eyebrow--cyan">{{why.eyebrow}}</p>
           <h2 class="h1" id="why-title">{{why.title}}</h2>
@@ -292,7 +292,7 @@
             </div>
             <div class="mosaic">
               <figure class="mosaic__item mosaic__item--wide">
-                <picture><source srcset="/assets/img/report-1.avif" type="image/avif"><img src="/assets/img/report-1.jpg" alt="{{report.photo_1_alt}}" width="900" height="1200" loading="lazy" decoding="async" style="object-position:50% 45%"></picture>
+                <picture><source srcset="/assets/img/report-1-640.avif 640w, /assets/img/report-1.avif 900w" sizes="(max-width: 991px) 100vw, 728px" type="image/avif"><img src="/assets/img/report-1.jpg" alt="{{report.photo_1_alt}}" width="900" height="1200" loading="lazy" decoding="async" style="object-position:50% 45%"></picture>
                 <figcaption>{{report.photo_1}}</figcaption>
               </figure>
               <figure class="mosaic__item">
@@ -300,7 +300,7 @@
                 <figcaption>{{report.photo_2}}</figcaption>
               </figure>
               <figure class="mosaic__item">
-                <picture><source srcset="/assets/img/report-3.avif" type="image/avif"><img src="/assets/img/report-3.jpg" alt="{{report.photo_3_alt}}" width="900" height="675" loading="lazy" decoding="async" style="object-position:50% 0%"></picture>
+                <picture><source srcset="/assets/img/report-3-640.avif 640w, /assets/img/report-3.avif 900w" sizes="(max-width: 991px) 50vw, 356px" type="image/avif"><img src="/assets/img/report-3.jpg" alt="{{report.photo_3_alt}}" width="900" height="675" loading="lazy" decoding="async" style="object-position:50% 0%"></picture>
                 <figcaption>{{report.photo_3}}</figcaption>
               </figure>
             </div>
