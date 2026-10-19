@@ -224,6 +224,9 @@ def main():
     shutil.copytree(ROOT / "assets", DIST / "assets", ignore=shutil.ignore_patterns(".DS_Store"))
     for f in ["robots.txt", "site.webmanifest"]:
         shutil.copy(ROOT / f, DIST / f)
+    # site-root files as-is (search engine verification files etc.)
+    for f in (ROOT / "static").iterdir():
+        shutil.copy(f, DIST / f.name)
     # GitHub Pages: custom domain, no Jekyll, and static stand-ins for the old Netlify redirects
     (DIST / "CNAME").write_text("pulsar-ai.co\n")
     (DIST / ".nojekyll").write_text("")
