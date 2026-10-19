@@ -199,6 +199,8 @@
   "privacy.t2": "We do not sell your data and do not use it for unrelated marketing.",
   "privacy.h3": "How long we keep it",
   "privacy.t3": "We keep your request for as long as needed to handle it and maintain our business relationship, and delete it on request.",
+  "privacy.h5": "Analytics",
+  "privacy.t5": "We use Google Analytics 4 through Google Tag Manager to understand how visitors use the site: pages viewed, button clicks and form submissions. It relies on cookies and collects technical data such as device, browser and approximate location. We do not send names or contact details from the form to Google. You can block analytics cookies in your browser settings or with the Google Analytics opt-out add-on.",
   "privacy.h4": "Your rights",
   "privacy.t4": "You can ask us to access, correct or delete your personal data at any time by writing to"
 }
