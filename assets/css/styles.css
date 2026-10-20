@@ -181,9 +181,9 @@ button { cursor: pointer; border: 0; background: none; padding: 0; }
 .btn--primary:hover { background: linear-gradient(180deg, var(--cyan-900) 0%, var(--cyan-800) 100%); }
 .btn--primary:active { transform: translateY(1px); }
 .btn--sm { padding: 8px 16px; font-size: 14px; line-height: 24px; }
-/* On white the same teal reads darker than on the dark hero; lift it a little so both CTAs look alike */
+/* On white the brand teal reads darker than on the dark hero, so CTAs on white use the next UI kit step: cyan 700 → 600 */
 .header .btn--primary, .menu .btn--primary {
-  background: linear-gradient(180deg, color-mix(in srgb, var(--cyan-800) 55%, var(--cyan-700)) 0%, color-mix(in srgb, var(--cyan-700) 70%, var(--cyan-600)) 100%);
+  background: linear-gradient(180deg, var(--cyan-700) 0%, var(--cyan-600) 100%);
 }
 .header .btn--primary:hover, .menu .btn--primary:hover { background: linear-gradient(180deg, var(--cyan-800) 0%, var(--cyan-700) 100%); }
 .btn--block { width: 100%; }
