@@ -182,10 +182,10 @@ button { cursor: pointer; border: 0; background: none; padding: 0; }
 .btn--primary:active { transform: translateY(1px); }
 .btn--sm { padding: 8px 16px; font-size: 14px; line-height: 24px; }
 /* On white the brand teal reads darker than on the dark hero, so CTAs on white use the next UI kit step: cyan 700 → 600 */
-.header .btn--primary, .menu .btn--primary {
+.header .btn--primary, .menu .btn--primary, .form-card .btn--primary {
   background: linear-gradient(180deg, var(--cyan-700) 0%, var(--cyan-600) 100%);
 }
-.header .btn--primary:hover, .menu .btn--primary:hover { background: linear-gradient(180deg, var(--cyan-800) 0%, var(--cyan-700) 100%); }
+.header .btn--primary:hover, .menu .btn--primary:hover, .form-card .btn--primary:hover { background: linear-gradient(180deg, var(--cyan-800) 0%, var(--cyan-700) 100%); }
 .btn--block { width: 100%; }
 
 /* Icons ------------------------------------------------------------------- */
