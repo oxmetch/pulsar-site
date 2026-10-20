@@ -42,7 +42,7 @@
       menu.querySelector('.menu__close')?.focus();
     } else {
       menu.classList.remove('is-open');
-      setTimeout(() => { if (!menu.classList.contains('is-open')) menu.hidden = true; }, 200);
+      setTimeout(() => { if (!menu.classList.contains('is-open')) menu.hidden = true; }, 300);
       openBtn.focus({ preventScroll: true });
     }
     openBtn.setAttribute('aria-expanded', String(open));

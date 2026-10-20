@@ -306,7 +306,7 @@ button { cursor: pointer; border: 0; background: none; padding: 0; }
   background: var(--white);
   opacity: 0;
   visibility: hidden;
-  transition: opacity .2s ease, visibility .2s ease;
+  transition: opacity .3s ease, visibility .3s ease;
 }
 .menu.is-open { opacity: 1; visibility: visible; }
 .menu__head {
@@ -324,8 +324,30 @@ button { cursor: pointer; border: 0; background: none; padding: 0; }
   width: 40px;
   height: 40px;
   border-radius: 8px;
-  background: var(--gray-100);
+  /* starts looking exactly like the burger, then turns into the close state */
+  box-shadow: inset 0 0 0 1px var(--gray-200);
+  color: var(--ink);
+  transition: background-color .3s ease, box-shadow .3s ease;
 }
+.menu.is-open .menu__close { background: var(--gray-100); box-shadow: inset 0 0 0 1px transparent; }
+
+/* Three bars that morph into a cross: outer bars meet in the middle and rotate, the middle one shrinks away */
+.burger-icon { position: relative; width: 16px; height: 12px; }
+.burger-icon span {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  border-radius: 1px;
+  background: currentColor;
+  transition: transform .35s cubic-bezier(.65, 0, .35, 1), opacity .2s ease;
+}
+.burger-icon span:nth-child(1) { top: 0; }
+.burger-icon span:nth-child(2) { top: 5px; }
+.burger-icon span:nth-child(3) { top: 10px; }
+.menu.is-open .burger-icon span:nth-child(1) { transform: translateY(5px) rotate(45deg); }
+.menu.is-open .burger-icon span:nth-child(2) { transform: scaleX(0); opacity: 0; }
+.menu.is-open .burger-icon span:nth-child(3) { transform: translateY(-5px) rotate(-45deg); }
 .menu__nav { padding-top: 24px; }
 .menu__nav a {
   display: flex;
@@ -894,6 +916,7 @@ body.menu-open { overflow: hidden; }
   html { scroll-behavior: auto; }
   .reveal { opacity: 1; transform: none; transition: none; }
   .step__line::before { animation: none; }
+  .burger-icon span, .menu__close { transition: none; }
   * { transition-duration: 0s !important; }
 }
 
