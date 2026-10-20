@@ -34,15 +34,23 @@
   const menu = document.getElementById('menu');
   const openBtn = document.querySelector('[data-menu-open]');
 
+  let closeTimer;
   const setMenu = (open) => {
     if (!menu || !openBtn) return;
+    clearTimeout(closeTimer);
     if (open) {
+      menu.classList.remove('is-closing');
       menu.hidden = false;
       requestAnimationFrame(() => menu.classList.add('is-open'));
       menu.querySelector('.menu__close')?.focus();
     } else {
-      menu.classList.remove('is-open');
-      setTimeout(() => { if (!menu.classList.contains('is-open')) menu.hidden = true; }, 300);
+      // cross → burger first, then fade the menu out
+      const morph = reduceMotion ? 0 : 300;
+      menu.classList.add('is-closing');
+      closeTimer = setTimeout(() => {
+        menu.classList.remove('is-open', 'is-closing');
+        setTimeout(() => { if (!menu.classList.contains('is-open')) menu.hidden = true; }, 300);
+      }, morph);
       openBtn.focus({ preventScroll: true });
     }
     openBtn.setAttribute('aria-expanded', String(open));
